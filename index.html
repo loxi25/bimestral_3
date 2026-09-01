@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Primer Proyecto con Tailwind CSS</title>
+<!-- Importación del CDN de Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+<div class="flex justify-center items-center gap-8 min-h-screen">
+    
+<div class="bg-slate-950 rounded-2xl shadow-xl p-6 max-w-sm w-full border border-slate-200 text-center">
+<!-- Foto de Perfil con Anillo de Estado -->
+<div class="relative w-24 h-24 mx-auto mb-4">
+<img src="https://previews.123rf.com/images/doublerdesign/doublerdesign2111/doublerdesign211100154/177923467-coding-programmer-website-company-vector-logo-design.jpg"
+alt="Avatar"
+class="rounded-full object-cover w-full h-full border-4 border-indigo-500 shadow-md">
+<span class="absolute bottom-1 right-1 w-4 h-4 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<!-- Nombre y Rol -->
+<h2 class="text-xl font-bold text-slate-800">oscar sanchez</h2>
+<p class="text-sm font-medium text-indigo-600 mb-3">desarrollador web  </p>
+<p class="text-slate-500 text-xs mb-4 leading-relaxed">
+Apasionado por la tecnología, construyendo aplicaciones web .
+</p>
+<!-- Etiquetas / Badges de Habilidades -->
+<div class="flex justify-center gap-2 mb-6">
+<span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded-full font-semibold">HTML5</span>
+<span class="bg-sky-50 text-sky-700 text-xs px-3 py-1 rounded-full font-semibold">Tailwind</span>
+<span class="bg-amber-50 text-amber-700 text-xs px-3 py-1 rounded-full font-semibold">JavaScript</span>
+</div>
+
+<!-- Estadísticas del Perfil con Fondo y Bordes Redondeados -->
+<div class="flex justify-around bg-slate-50 rounded-xl p-3 mb-8">
+<span class="bg-indigo-50 text-indigo-700 text-xs px-3 py-1 rounded-full font-semibold">Proyectos (14)</span>
+<span class="bg-sky-50 text-sky-700 text-xs px-3 py-1 rounded-full font-semibold">Seguidores (1.2k)</span>
+<span class="bg-amber-50 text-amber-700 text-xs px-3 py-1 rounded-full font-semibold">Nivel (85)</span>
+</div>
+
+
+
+<!----------------------------------------------- -->
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Mi Espacio Personal</a>
+            <nav>
+                <ul class="nav-menu">
+                <li><a href="index.html" class="active">Inicio</a></li>
+                <li><a href="nacimiento.html">Nacimiento</a></li>
+                <li><a href="familia.html">Familia</a></li>
+                <li><a href="educacion.html">Educación</a></li>
+            </nav>
+        </div>
+    </header>
+
+
