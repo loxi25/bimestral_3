@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 01-09-2026 a las 14:24:34
+-- Tiempo de generación: 03-09-2026 a las 01:16:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -45,6 +45,19 @@ INSERT INTO `admin` (`id_admin`, `nombre_admin`, `email`, `password`, `id_client
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id_categoria` int(50) NOT NULL,
+  `nombre_categoria` varchar(100) NOT NULL,
+  `descripcion` varchar(300) NOT NULL,
+  `id_producto` int(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `cliente`
 --
 
@@ -69,7 +82,23 @@ CREATE TABLE `producto` (
   `nombre_producto` int(11) NOT NULL,
   `precio_producto` int(11) NOT NULL,
   `presupuesto` int(11) NOT NULL,
-  `id_admin` int(50) NOT NULL
+  `id_admin` int(50) NOT NULL,
+  `tiempo_fabricacion` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `solicitudes`
+--
+
+CREATE TABLE `solicitudes` (
+  `id_solicitud` int(11) NOT NULL,
+  `mensaje` int(11) NOT NULL,
+  `fecha` int(11) NOT NULL,
+  `id_producto` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_categoria` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -82,6 +111,13 @@ CREATE TABLE `producto` (
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id_admin`),
   ADD UNIQUE KEY `id_cliente` (`id_cliente`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`),
+  ADD UNIQUE KEY `id_producto` (`id_producto`);
 
 --
 -- Indices de la tabla `cliente`
@@ -97,6 +133,15 @@ ALTER TABLE `producto`
   ADD UNIQUE KEY `id_admin` (`id_admin`);
 
 --
+-- Indices de la tabla `solicitudes`
+--
+ALTER TABLE `solicitudes`
+  ADD PRIMARY KEY (`id_solicitud`),
+  ADD UNIQUE KEY `id_categoria` (`id_categoria`),
+  ADD UNIQUE KEY `id_cliente` (`id_cliente`),
+  ADD UNIQUE KEY `id_producto` (`id_producto`);
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -110,7 +155,16 @@ ALTER TABLE `cliente`
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `admin` (`id_admin`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `solicitudes` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `producto_ibfk_3` FOREIGN KEY (`id_producto`) REFERENCES `categoria` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `solicitudes`
+--
+ALTER TABLE `solicitudes`
+  ADD CONSTRAINT `solicitudes_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `solicitudes_ibfk_2` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
