@@ -1,60 +1,28 @@
 <?php
-<<<<<<< HEAD
-    require_once '../modelo/usuario_modelo.php';
+// Cargar el modelo del usuario
+require_once __DIR__ . '/../modelo/usuario_modelo.php';
 
-    //Mostrar formulario
-    function mostrar_login()
-    {
-        require_once '../vista/login_vista.php';
-    }
+// Mostrar formulario de inicio de sesión
+function mostrar_login() {
+    require_once __DIR__ . '/../vista/login_vista.php';
+}
 
-    // Procesar credenciales
-    function autenticar()
-    {
-        if($_SERVER['REQUEST_METHOD'] == 'POST' )
-        {
-            $login =$_POST['login'];
-            $pass =$_POST['password'];
-=======
-    require_once'../modelo/usuario_modelo.php';
+// Procesar credenciales enviadas por POST
+function autenticar() {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $login = $_POST['login'];
+        $pass  = $_POST['password']; // Se unifica para usar el campo 'password' enviado por el formulario
 
-    //mostrar funcion
-    function mostrar_login()
-    {
-        require_once'../vista/login_vista.php';
-    
-    }
+        // Validar el usuario con la base de datos usando el modelo
+        $usuario = validar_usuario($login, $pass);
 
-    // procesar credenciales
-    function autenticar()
-    {
-        if($_SERVER['REQUEST_METHOB'] == 'POST')
-        {
-            $login = $_POST['login'];
-            $pass = $_POST['password_admin'];
->>>>>>> 9085e2ad91d87eac00d33f0951f2362025c5b0cf
-
-            $usuario = validar_usuario($login, $pass);
-
-            if($usuario)
-            {
-<<<<<<< HEAD
-                header("Location: index.php");
-            }
-            else
-            {
-                echo 'Credenciales incorrectas';
-            }
+        if ($usuario && $usuario['contar'] > 0) {
+            // Redirigir al inicio del sistema si el inicio de sesión es exitoso
+            header("Location: index.php");
+            exit();
+        } else {
+            echo 'Credenciales incorrectas';
         }
     }
-=======
-                header("location: index.php");
-            }
-            else
-            {
-                echo 'credenciales incorrectas';
-            }
-        }
-    }
+}
 ?>
->>>>>>> 9085e2ad91d87eac00d33f0951f2362025c5b0cf
