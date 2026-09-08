@@ -1,19 +1,21 @@
 <?php
-// Requerir los parámetros de configuración de constantes
-require_once __DIR__ . '/constantes.php';
 
-function conectar() {
-    // Establecer conexión con la BD
-    $conexion = mysqli_connect(HOST, USER, PW, BD);
+$servidor = "localhost";
+$usuario = "root";
+$clave = "";
+$base_datos = "codex"; // <-- Cambiado de TRAVEL a codex
 
-    // Verificar si la conexión falló
-    if (!$conexion) {
-        die("La conexión con la BD falló: " . mysqli_connect_error());
-    }
 
-    // Establecer conjunto de caracteres utf8mb4 para el hosting
-    mysqli_set_charset($conexion, 'utf8mb4');
 
-    return $conexion;
+$con = new mysqli($servidor, $usuario, $clave, $base_datos);
+
+if  ($con->connect_error) {
+    die("Conexión fallida: " . $con->connect_error);
 }
-?>
+
+else {
+    echo "Conexión exitosa a la BD!";
+}
+$con->set_charset("utf8mb4");
+
+?> 
