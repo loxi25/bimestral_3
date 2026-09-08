@@ -1,21 +1,34 @@
 <?php
 
-$servidor = "localhost";
-$usuario = "root";
-$clave = "";
-$base_datos = "codex"; // <-- Cambiado de TRAVEL a codex
+// Cargar las constantes de conexión
+require_once __DIR__ . '/constantes.php';
 
 
+function conectar()
+{
+    // Crear conexión con MySQL
+    $conexion = mysqli_connect(
+        HOST,
+        USER,
+        PW,
+        BD
+    );
 
-$con = new mysqli($servidor, $usuario, $clave, $base_datos);
+    // Verificar si la conexión falló
+    if (!$conexion) {
 
-if  ($con->connect_error) {
-    die("Conexión fallida: " . $con->connect_error);
+        die(
+            "Error de conexión con la base de datos: "
+            . mysqli_connect_error()
+        );
+
+    }
+
+    // Establecer UTF-8
+    mysqli_set_charset($conexion, "utf8mb4");
+
+    // Devolver conexión
+    return $conexion;
 }
 
-else {
-    echo "Conexión exitosa a la BD!";
-}
-$con->set_charset("utf8mb4");
-
-?> 
+?>
